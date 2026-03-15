@@ -320,6 +320,36 @@
 
     /* ═══════════ PRICING ═══════════ */
     #pricing { padding: 120px 0; }
+
+    /* Selettore periodicità */
+    .period-tabs {
+      display: flex; justify-content: center; gap: 8px;
+      flex-wrap: wrap; margin-bottom: 48px;
+    }
+    .period-tab {
+      padding: 9px 22px; border-radius: 50px; cursor: none;
+      font-family: var(--fh); font-weight: 600; font-size: 13px;
+      border: 1.5px solid var(--border); color: var(--muted);
+      background: transparent; transition: var(--ease);
+      position: relative;
+    }
+    .period-tab:hover { border-color: var(--neon); color: var(--white); }
+    .period-tab.active {
+      background: linear-gradient(135deg, var(--neon), var(--violet));
+      border-color: transparent; color: #fff;
+      box-shadow: var(--glow);
+    }
+    .period-tab .save-badge {
+      position: absolute; top: -9px; right: -6px;
+      background: var(--violet); color: #fff;
+      font-size: 9px; font-weight: 700; letter-spacing: .5px;
+      padding: 2px 7px; border-radius: 50px;
+      opacity: 0; transition: opacity .3s;
+    }
+    .period-tab.active .save-badge,
+    .period-tab:hover .save-badge { opacity: 1; }
+
+    /* Cards */
     .pr-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
     .pr-card {
       background: var(--bg2); border-radius: 20px; padding: 40px 32px;
@@ -351,13 +381,21 @@
       font-size: 12px; font-family: var(--fh); font-weight: 700;
       letter-spacing: 2px; text-transform: uppercase; color: var(--neon); margin-bottom: 8px;
     }
-    .pr-name { font-family: var(--fh); font-size: 24px; font-weight: 800; margin-bottom: 20px; }
+    .pr-name { font-family: var(--fh); font-size: 24px; font-weight: 800; margin-bottom: 16px; }
+    .pr-price-wrap { margin-bottom: 4px; }
     .pr-price {
       font-family: var(--fh); font-size: 52px; font-weight: 800;
-      letter-spacing: -2px; line-height: 1; margin-bottom: 6px;
+      letter-spacing: -2px; line-height: 1;
+      transition: transform .25s cubic-bezier(.4,0,.2,1), opacity .25s;
     }
+    .pr-price.changing { transform: translateY(6px); opacity: 0; }
     .pr-price sup { font-size: 22px; vertical-align: top; margin-top: 10px; }
-    .pr-per { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+    .pr-per { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    .pr-equiv {
+      font-size: 12px; color: var(--neon); font-family: var(--fh);
+      font-weight: 600; min-height: 18px; margin-bottom: 22px;
+      transition: opacity .25s;
+    }
     .pr-div { height: 1px; background: var(--border); margin-bottom: 20px; }
     .pr-feats { list-style: none; flex: 1; }
     .pr-feats li {
@@ -373,6 +411,10 @@
       color: var(--neon); font-size: 9px; flex-shrink: 0;
     }
     .pr-btn { margin-top: 28px; width: 100%; justify-content: center; }
+    .pr-note {
+      text-align: center; font-size: 13px; color: var(--muted);
+      margin-top: 28px; font-family: var(--fh);
+    }
 
     /* ═══════════ CONTACT ═══════════ */
     #contact {
@@ -594,17 +636,40 @@
     <div class="wrap">
       <div class="sec-h">
         <span class="label">Prezzi</span>
-        <h2 class="sec-title rev">Pacchetti mensili</h2>
-        <p class="sec-sub rev d1">Tutto incluso. Nessuna sorpresa. Disdici quando vuoi.</p>
+        <h2 class="sec-title rev">Scegli il tuo piano</h2>
+        <p class="sec-sub rev d1">Tutto incluso. Nessuna sorpresa. Paga anticipato e risparmia fino al 17%.</p>
       </div>
+
+      <!-- Selettore periodicità -->
+      <div class="period-tabs rev d1">
+        <button class="period-tab active" data-period="1">
+          Mensile
+        </button>
+        <button class="period-tab" data-period="3">
+          Trimestrale
+          <span class="save-badge">–6%</span>
+        </button>
+        <button class="period-tab" data-period="6">
+          Semestrale
+          <span class="save-badge">–10%</span>
+        </button>
+        <button class="period-tab" data-period="12">
+          Annuale
+          <span class="save-badge">–17%</span>
+        </button>
+      </div>
+
       <div class="pr-grid">
 
         <!-- Base -->
         <div class="pr-card rev">
           <div class="pr-tier">Pacchetto</div>
           <div class="pr-name">Base</div>
-          <div class="pr-price"><sup>€</sup>30</div>
-          <div class="pr-per">al mese · tutto incluso</div>
+          <div class="pr-price-wrap">
+            <div class="pr-price" id="price-base"><sup>€</sup>30</div>
+          </div>
+          <div class="pr-per" id="per-base">al mese · tutto incluso</div>
+          <div class="pr-equiv" id="equiv-base"></div>
           <div class="pr-div"></div>
           <ul class="pr-feats">
             <li><span class="chk">✓</span> Sito vetrina completo</li>
@@ -621,8 +686,11 @@
           <div class="feat-b">Più scelto</div>
           <div class="pr-tier">Pacchetto</div>
           <div class="pr-name">Business</div>
-          <div class="pr-price"><sup>€</sup>50</div>
-          <div class="pr-per">al mese · tutto incluso</div>
+          <div class="pr-price-wrap">
+            <div class="pr-price" id="price-business"><sup>€</sup>50</div>
+          </div>
+          <div class="pr-per" id="per-business">al mese · tutto incluso</div>
+          <div class="pr-equiv" id="equiv-business"></div>
           <div class="pr-div"></div>
           <ul class="pr-feats">
             <li><span class="chk">✓</span> Sito completo personalizzato</li>
@@ -638,8 +706,11 @@
         <div class="pr-card rev d2">
           <div class="pr-tier">Pacchetto</div>
           <div class="pr-name">Pro</div>
-          <div class="pr-price"><sup>€</sup>80</div>
-          <div class="pr-per">al mese · tutto incluso</div>
+          <div class="pr-price-wrap">
+            <div class="pr-price" id="price-pro"><sup>€</sup>80</div>
+          </div>
+          <div class="pr-per" id="per-pro">al mese · tutto incluso</div>
+          <div class="pr-equiv" id="equiv-pro"></div>
           <div class="pr-div"></div>
           <ul class="pr-feats">
             <li><span class="chk">✓</span> Tutto del Business</li>
@@ -652,6 +723,8 @@
         </div>
 
       </div>
+
+      <p class="pr-note rev">* I piani trimestrali, semestrali e annuali si pagano anticipati in un'unica soluzione. Disdici con 15 giorni di anticipo.</p>
     </div>
   </section>
 
@@ -669,16 +742,16 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             kiwyv22@gmail.com
           </a>
-          <a href="https://wa.me/393923355521" target="_blank" class="ct-link">
+          <a href="https://wa.me/393000000000" target="_blank" class="ct-link">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
             WhatsApp
           </a>
-          <a href="https://instagram.com/friendly_noise_official" target="_blank" class="ct-link">
+          <a href="https://instagram.com/stre_gatto_chill" target="_blank" class="ct-link">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             @stre_gatto_chill
           </a>
         </div>
-        <a href="https://wa.me/393923355521" target="_blank" class="btn btn-p" style="font-size:17px;padding:18px 44px">
+        <a href="https://wa.me/393000000000" target="_blank" class="btn btn-p" style="font-size:17px;padding:18px 44px">
           Richiedi un sito
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -758,6 +831,41 @@
       });
     },{threshold:.5});
     document.querySelectorAll('[data-c]').forEach(el=>cobs.observe(el));
+
+    /* ---------- Period selector ---------- */
+    (function() {
+      const prices   = { base: 30, business: 50, pro: 80 };
+      const discounts= { 1: 1, 3: 0.94, 6: 0.90, 12: 0.835 };
+      const label    = { 1: 'al mese · tutto incluso', 3: 'ogni 3 mesi · tutto incluso', 6: 'ogni 6 mesi · tutto incluso', 12: "all'anno · tutto incluso" };
+
+      function updatePrices(months) {
+        ['base','business','pro'].forEach(pkg => {
+          const total  = Math.round(prices[pkg] * months * discounts[months]);
+          const perM   = Math.round(total / months);
+          const prEl   = document.getElementById('price-' + pkg);
+          const perEl  = document.getElementById('per-' + pkg);
+          const eqEl   = document.getElementById('equiv-' + pkg);
+
+          prEl.classList.add('changing');
+          setTimeout(() => {
+            prEl.innerHTML   = '<sup>€</sup>' + total;
+            perEl.textContent= label[months];
+            eqEl.textContent = months > 1 ? '≈ €' + perM + '/mese  ·  pagamento unico' : '';
+            prEl.classList.remove('changing');
+          }, 180);
+        });
+      }
+
+      document.querySelectorAll('.period-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.period-tab').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          updatePrices(parseInt(btn.dataset.period));
+        });
+        btn.addEventListener('mouseenter', () => document.body.classList.add('ch'));
+        btn.addEventListener('mouseleave', () => document.body.classList.remove('ch'));
+      });
+    })();
   </script>
 </body>
 </html>
