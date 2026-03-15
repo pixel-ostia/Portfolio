@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="Forno Tradizione – Pane artigianale, cornetti e dolci freschi ogni mattina a Roma. Lievito madre, farina biologica."/>
+  <title>Forno Tradizione – Panetteria Artigianale</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍞</text></svg>"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ═══════════════════════════════════════════
+       FORNO TRADIZIONE — panettiere.html — CSS
+    ═══════════════════════════════════════════ */
+    :root {
+      --bg:  #130d04;  --bg2: #1c1207;  --bg3: #0d0800;
+      --am:  #d97706;  --aml: #f59e0b;  --cr:  #fef3e2;
+      --wh:  #fef5e8;  --mu:  #9a8060;
+      --bdr: rgba(217,119,6,.2);
+      --fs:  'Playfair Display', serif;
+      --fb:  'Barlow', sans-serif;
+      --ease:.36s cubic-bezier(.4,0,.2,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--wh);font-family:var(--fb);overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    ::-webkit-scrollbar{width:4px}
+    ::-webkit-scrollbar-thumb{background:var(--am);border-radius:99px}
+
+    body::before{content:'';position:fixed;inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events:none;z-index:1;opacity:.3}
+
+    /* ── NAV ── */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      padding:18px 6%;display:flex;align-items:center;justify-content:space-between;
+      transition:background .4s,padding .4s;
+    }
+    nav.s{background:rgba(19,13,4,.92);backdrop-filter:blur(16px);padding:12px 6%;border-bottom:1px solid var(--bdr)}
+    .logo{font-family:var(--fs);font-size:22px;font-weight:700;color:var(--aml)}
+    .logo em{color:var(--wh);font-style:italic;font-weight:400}
+    .nlinks{display:flex;gap:28px;list-style:none}
+    .nlinks a{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);transition:color .25s}
+    .nlinks a:hover{color:var(--aml)}
+    .nbtn{
+      background:var(--am);color:#000;padding:9px 22px;
+      font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+      border-radius:2px;transition:all .3s;
+    }
+    .nbtn:hover{background:var(--aml)}
+    @media(max-width:760px){.nlinks,.nbtn{display:none}}
+
+    /* ── HERO ── */
+    #hero{
+      min-height:100vh;display:flex;align-items:center;
+      position:relative;overflow:hidden;padding:130px 6% 80px;
+    }
+    /* Warm radial glow */
+    .h-glow{
+      position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 80% 60% at 25% 55%,rgba(217,119,6,.14) 0%,transparent 60%),
+        radial-gradient(ellipse 40% 40% at 85% 20%,rgba(245,158,11,.08) 0%,transparent 55%);
+    }
+    /* Diagonal stripe */
+    .h-stripe{
+      position:absolute;right:0;top:0;bottom:0;width:42%;
+      background:linear-gradient(150deg,#2d1900 0%,#6b3a00 50%,#d97706 100%);
+      clip-path:polygon(20% 0,100% 0,100% 100%,0 100%);
+      opacity:.18;
+    }
+    .h-inner{position:relative;z-index:2;max-width:640px}
+    .h-since{
+      display:inline-flex;align-items:center;gap:10px;
+      font-size:11px;letter-spacing:4px;text-transform:uppercase;
+      color:var(--am);margin-bottom:24px;border-bottom:1px solid rgba(217,119,6,.3);
+      padding-bottom:10px;
+    }
+    h1{
+      font-family:var(--fs);font-size:clamp(52px,8vw,96px);
+      font-weight:700;line-height:.95;letter-spacing:-2px;margin-bottom:12px;
+    }
+    h1 em{font-style:italic;font-weight:400;color:var(--aml)}
+    .h-sub{font-family:var(--fs);font-style:italic;font-size:clamp(18px,2.5vw,28px);color:var(--mu);margin-bottom:32px}
+    .h-p{font-size:16px;color:var(--mu);line-height:1.85;max-width:460px;margin-bottom:48px}
+    .btns{display:flex;gap:14px;flex-wrap:wrap}
+    .ba{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:15px 36px;background:var(--am);color:#000;
+      font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+      border-radius:2px;transition:all .3s;
+    }
+    .ba:hover{background:var(--aml);transform:translateY(-3px);box-shadow:0 14px 36px rgba(217,119,6,.3)}
+    .bl{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 28px;border:1px solid rgba(217,119,6,.35);
+      color:var(--wh);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+      border-radius:2px;transition:all .3s;
+    }
+    .bl:hover{border-color:var(--am);color:var(--am)}
+
+    /* ── STRIP ── */
+    .strip{
+      background:var(--am);padding:14px 6%;
+      display:flex;justify-content:center;align-items:center;
+      gap:40px;flex-wrap:wrap;
+    }
+    .st-item{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#000}
+
+    /* ── COMMONS ── */
+    .s-eye{text-align:center;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--am);margin-bottom:12px}
+    .s-h{font-family:var(--fs);text-align:center;font-size:clamp(30px,4vw,52px);font-weight:700;margin-bottom:14px}
+    .s-h em{font-style:italic;font-weight:400;color:var(--aml)}
+    .s-sub{text-align:center;color:var(--mu);font-size:15px;margin-bottom:56px}
+
+    /* ── PRODOTTI ── */
+    #prodotti{padding:110px 6%}
+    .pr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:1100px;margin:0 auto}
+    .pr{
+      background:var(--bg2);border:1px solid var(--bdr);border-radius:4px;
+      overflow:hidden;transition:transform .3s,box-shadow .3s;
+    }
+    .pr:hover{transform:translateY(-6px);box-shadow:0 24px 56px rgba(0,0,0,.5)}
+    .pr-thumb{height:180px;display:flex;align-items:center;justify-content:center;font-size:56px;position:relative}
+    .pr-badge{
+      position:absolute;top:12px;right:12px;
+      background:var(--am);color:#000;font-size:10px;font-weight:700;
+      letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:2px;
+    }
+    .pr-body{padding:22px 20px}
+    .pr-n{font-family:var(--fs);font-size:20px;font-weight:700;color:var(--aml);margin-bottom:8px}
+    .pr-d{font-size:14px;color:var(--mu);line-height:1.7}
+
+    /* ── GALLERIA ── */
+    #galleria{padding:90px 6%;background:var(--bg3)}
+    .gl-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      grid-template-rows:190px 190px;
+      gap:6px;max-width:1000px;margin:0 auto;
+    }
+    .gi{border-radius:3px;overflow:hidden;position:relative}
+    .gi:first-child{grid-row:1/3}
+    .gi-bg{width:100%;height:100%;transition:transform .5s}
+    .gi:hover .gi-bg{transform:scale(1.05)}
+    .gi-l{
+      position:absolute;bottom:0;left:0;right:0;
+      padding:14px 12px 10px;
+      background:linear-gradient(to top,rgba(13,8,0,.9),transparent);
+      font-size:12px;color:var(--aml);letter-spacing:1px;
+    }
+
+    /* ── ORARI ── */
+    #orari{padding:100px 6%}
+    .or-in{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+    .or-h{font-family:var(--fs);font-size:42px;font-weight:700;margin-bottom:8px}
+    .or-h em{font-style:italic;font-weight:400;color:var(--aml)}
+    .or-p{color:var(--mu);font-size:15px;line-height:1.8;margin-bottom:28px}
+    .or-tbl{width:100%;border-collapse:collapse}
+    .or-tbl tr{border-bottom:1px solid var(--bdr)}
+    .or-tbl td{padding:12px 0;font-size:14px}
+    .or-tbl td:last-child{color:var(--am);text-align:right;font-weight:600;letter-spacing:.5px}
+    .ct-box{background:var(--bg2);border:1px solid var(--bdr);border-radius:4px;padding:32px}
+    .ct-box-h{font-family:var(--fs);font-size:24px;font-weight:700;color:var(--aml);margin-bottom:24px}
+    .ct-row{display:flex;gap:14px;margin-bottom:18px;align-items:flex-start}
+    .ct-ic{font-size:20px;min-width:24px}
+    .ct-t{font-size:14px;color:var(--mu);line-height:1.6}
+    .ct-t strong{color:var(--wh);display:block;font-size:12px;letter-spacing:.5px;margin-bottom:2px}
+
+    /* ── CTA ── */
+    #cta{
+      padding:110px 6%;text-align:center;
+      background:
+        radial-gradient(ellipse 60% 55% at 50% 50%,rgba(217,119,6,.07) 0%,transparent 65%),
+        var(--bg3);
+    }
+    #cta h2{font-family:var(--fs);font-size:clamp(32px,5vw,58px);font-weight:700;margin-bottom:16px}
+    #cta h2 em{font-style:italic;font-weight:400;color:var(--aml)}
+    #cta p{color:var(--mu);max-width:440px;margin:0 auto 44px;font-size:16px;line-height:1.8}
+
+    /* ── FOOTER ── */
+    footer{
+      padding:28px 6%;border-top:1px solid var(--bdr);
+      display:flex;align-items:center;justify-content:space-between;
+      font-size:13px;color:var(--mu);flex-wrap:wrap;gap:12px;
+    }
+    .back{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);transition:color .25s}
+    .back:hover{color:var(--am)}
+
+    .rev{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+    .rev.in{opacity:1;transform:translateY(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+    @media(max-width:800px){
+      .gl-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+      .gi:first-child{grid-row:auto}
+      .or-in{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="logo">Forno <em>Tradizione</em></div>
+    <ul class="nlinks">
+      <li><a href="#prodotti">Prodotti</a></li>
+      <li><a href="#galleria">Galleria</a></li>
+      <li><a href="#orari">Orari</a></li>
+    </ul>
+    <a href="tel:+390698765432" class="nbtn">📞 Chiamaci</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="h-glow"></div>
+    <div class="h-stripe"></div>
+    <div class="h-inner">
+      <div class="h-since">Artigianale dal 1978</div>
+      <h1>Pane <em>fresco</em><br>ogni mattina</h1>
+      <div class="h-sub">Lievito madre · Farina biologica</div>
+      <p class="h-p">Il profumo del pane appena sfornato ti aspetta ogni giorno dalle 6:30. Ricette tradizionali, ingredienti selezionati, qualità che si sente al primo morso.</p>
+      <div class="btns">
+        <a href="#prodotti" class="ba">🍞 Scopri i prodotti</a>
+        <a href="#orari" class="bl">Orari &amp; contatti</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="st-item">🌾 Farina biologica</div>
+    <div class="st-item">⏰ Aperto 7 giorni</div>
+    <div class="st-item">🔥 Sfornato ogni 2 ore</div>
+    <div class="st-item">🌿 Lievito madre</div>
+  </div>
+
+  <!-- PRODOTTI -->
+  <section id="prodotti">
+    <div class="s-eye rev">I nostri prodotti</div>
+    <h2 class="s-h rev d1">Fatto con <em>amore</em></h2>
+    <p class="s-sub rev d2">Ogni prodotto è preparato ogni mattina con ingredienti freschi e selezionati</p>
+    <div class="pr-grid">
+      <div class="pr rev"><div class="pr-thumb" style="background:linear-gradient(135deg,#2d1a00,#8b4513)">🍞</div><div class="pr-body"><div class="pr-n">Pane di Casa</div><div class="pr-d">La nostra ricetta storica. Crosta croccante, mollica morbida. Con lievito madre a lunga lievitazione.</div></div></div>
+      <div class="pr rev d1"><div class="pr-thumb" style="background:linear-gradient(135deg,#2d2200,#b8860b)">🥐<span class="pr-badge">Best seller</span></div><div class="pr-body"><div class="pr-n">Cornetti</div><div class="pr-d">Sfogliatura a mano ogni mattina. Vuoti, marmellata, crema o cioccolato. Caldi dalle 6:30.</div></div></div>
+      <div class="pr rev d2"><div class="pr-thumb" style="background:linear-gradient(135deg,#1a1200,#7c4700)">🍰</div><div class="pr-body"><div class="pr-n">Dolci da Forno</div><div class="pr-d">Ciambelloni, crostate, plumcake e biscotti. Ideali per colazione o come regalo.</div></div></div>
+      <div class="pr rev"><div class="pr-thumb" style="background:linear-gradient(135deg,#1a0a00,#8b2500)">🥖</div><div class="pr-body"><div class="pr-n">Filoni &amp; Baguette</div><div class="pr-d">Perfetti per pranzo e cena. Anche integrali e ai cereali.</div></div></div>
+      <div class="pr rev d1"><div class="pr-thumb" style="background:linear-gradient(135deg,#0a1a00,#3d6b00)">🌿<span class="pr-badge">Bio</span></div><div class="pr-body"><div class="pr-n">Linea Bio</div><div class="pr-d">Farine biologiche certificate, senza conservanti. Gusto naturale garantito.</div></div></div>
+      <div class="pr rev d2"><div class="pr-thumb" style="background:linear-gradient(135deg,#1a0800,#6b2200)">🎂</div><div class="pr-body"><div class="pr-n">Torte su Ordinazione</div><div class="pr-d">Torte personalizzate per compleanni e cerimonie. Ordina con 48h di anticipo.</div></div></div>
+    </div>
+  </section>
+
+  <!-- GALLERIA -->
+  <section id="galleria">
+    <div class="s-eye rev">Foto</div>
+    <h2 class="s-h rev d1">Dal nostro <em>forno</em></h2>
+    <p class="s-sub rev d2" style="margin-bottom:36px">Ogni giorno un profumo diverso, sempre la stessa qualità</p>
+    <div class="gl-grid">
+      <div class="gi"><div class="gi-bg" style="background:linear-gradient(150deg,#3d2200,#8b4513,#d2691e);height:100%"></div><div class="gi-l">Il nostro forno</div></div>
+      <div class="gi"><div class="gi-bg" style="background:linear-gradient(135deg,#2d1a00,#c87941);height:190px"></div><div class="gi-l">Pane del mattino</div></div>
+      <div class="gi"><div class="gi-bg" style="background:linear-gradient(135deg,#2d2200,#d4a017);height:190px"></div><div class="gi-l">Cornetti freschi</div></div>
+      <div class="gi"><div class="gi-bg" style="background:linear-gradient(135deg,#1a0d00,#a0522d);height:190px"></div><div class="gi-l">Lavorazione a mano</div></div>
+      <div class="gi"><div class="gi-bg" style="background:linear-gradient(135deg,#1a1200,#7c5c00);height:190px"></div><div class="gi-l">Dolci artigianali</div></div>
+    </div>
+  </section>
+
+  <!-- ORARI -->
+  <section id="orari">
+    <div class="or-in">
+      <div class="rev">
+        <h2 class="or-h">Orari &amp; <em>Info</em></h2>
+        <p class="or-p">Aperti tutti i giorni con orario continuato. Vieni di mattina per il pane più fresco!</p>
+        <table class="or-tbl">
+          <tr><td>Lunedì – Venerdì</td><td>06:30–13:30 · 16:00–19:30</td></tr>
+          <tr><td>Sabato</td><td>06:30–14:00</td></tr>
+          <tr><td>Domenica</td><td>06:30–12:30</td></tr>
+          <tr><td style="color:var(--mu)">Lunedì pomeriggio</td><td style="color:var(--mu)!important;font-weight:400!important">Riposo</td></tr>
+        </table>
+      </div>
+      <div class="ct-box rev d1">
+        <div class="ct-box-h">Contattaci</div>
+        <div class="ct-row"><span class="ct-ic">📍</span><div class="ct-t"><strong>Indirizzo</strong>Via del Pane 15, Roma (RM)</div></div>
+        <div class="ct-row"><span class="ct-ic">📞</span><div class="ct-t"><strong>Telefono</strong>+39 06 987 6543</div></div>
+        <div class="ct-row"><span class="ct-ic">📱</span><div class="ct-t"><strong>WhatsApp</strong>+39 300 123 4567</div></div>
+        <div class="ct-row"><span class="ct-ic">📧</span><div class="ct-t"><strong>Email</strong>info@fornotradizione.it</div></div>
+        <div style="margin-top:24px">
+          <a href="https://wa.me/393000000000" target="_blank" class="ba" style="width:100%;justify-content:center">📲 Ordina su WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <h2 class="rev">Vieni a trovarci<br><em>ogni mattina</em></h2>
+    <p class="rev d1">Il pane più buono è quello appena sfornato. Ti aspettiamo dalle 6:30!</p>
+    <a href="https://maps.google.com" target="_blank" class="ba rev d2" style="padding:16px 44px">📍 Trova il negozio</a>
+  </section>
+
+  <footer>
+    <div>© Forno Tradizione · Via del Pane 15, Roma</div>
+    <a href="index.html" class="back">← Sito realizzato da Pixelostia</a>
+  </footer>
+
+  <script>
+    const nav=document.getElementById('nav');
+    window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>50),{passive:true});
+    const obs=new IntersectionObserver(e=>{
+      e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}});
+    },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const t=document.querySelector(a.getAttribute('href'));
+        if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+      });
+    });
+  </script>
+</body>
+</html>

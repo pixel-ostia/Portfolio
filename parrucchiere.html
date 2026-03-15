@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="Salon Élite – Parrucchiere a Roma. Taglio, colore, trattamenti di qualità. Prenota su WhatsApp."/>
+  <title>Salon Élite – Parrucchiere</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ═══════════════════════════════════════════
+       SALON ÉLITE — parrucchiere.html — CSS
+    ═══════════════════════════════════════════ */
+    :root {
+      --bg:   #0e0a0d;  --bg2:  #1a1318;  --bg3:  #120e12;
+      --gold: #c9a84c;  --gll:  #e8c97a;  --rose: #d4a0b8;
+      --wh:   #f5edf2;  --mu:   #9a8490;
+      --bdr:  rgba(201,168,76,.18);
+      --fs:   'Cormorant Garamond', serif;
+      --fb:   'DM Sans', sans-serif;
+      --ease: .36s cubic-bezier(.4,0,.2,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--wh);font-family:var(--fb);overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    ::-webkit-scrollbar{width:4px}
+    ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:99px}
+
+    /* ── Noise ── */
+    body::before{content:'';position:fixed;inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events:none;z-index:1;opacity:.3}
+
+    /* ── NAV ── */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      padding:20px 6%;display:flex;align-items:center;justify-content:space-between;
+      transition:background .4s,padding .4s;
+    }
+    nav.s{background:rgba(14,10,13,.92);backdrop-filter:blur(16px);padding:13px 6%;border-bottom:1px solid var(--bdr)}
+    .logo{font-family:var(--fs);font-size:26px;font-weight:600;letter-spacing:.5px;color:var(--gold)}
+    .logo em{color:var(--wh);font-style:italic}
+    .nlinks{display:flex;gap:30px;list-style:none}
+    .nlinks a{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);transition:color .25s}
+    .nlinks a:hover{color:var(--gold)}
+    .nbtn{
+      padding:9px 22px;border:1px solid var(--gold);border-radius:2px;
+      font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+      color:var(--gold);transition:all .3s;
+    }
+    .nbtn:hover{background:var(--gold);color:#000}
+    @media(max-width:760px){.nlinks,.nbtn{display:none}}
+
+    /* ── HERO ── */
+    #hero{
+      min-height:100vh;display:flex;align-items:center;
+      position:relative;overflow:hidden;padding:140px 6% 80px;
+      background:
+        radial-gradient(ellipse 70% 70% at 75% 45%,rgba(201,168,76,.08) 0%,transparent 65%),
+        radial-gradient(ellipse 50% 50% at 15% 80%,rgba(212,160,184,.05) 0%,transparent 60%),
+        var(--bg);
+    }
+    /* Vertical decorative line */
+    .h-vline{
+      position:absolute;left:6%;top:0;bottom:0;width:1px;
+      background:linear-gradient(to bottom,transparent 10%,rgba(201,168,76,.2) 40%,rgba(201,168,76,.2) 60%,transparent 90%);
+    }
+    /* Large faded letter */
+    .h-ghost{
+      position:absolute;right:-2%;top:50%;transform:translateY(-50%);
+      font-family:var(--fs);font-size:clamp(180px,22vw,300px);
+      font-weight:600;color:rgba(201,168,76,.035);
+      line-height:1;pointer-events:none;user-select:none;letter-spacing:-10px;
+    }
+    .h-inner{position:relative;z-index:2;max-width:640px;margin-left:max(48px,4%)}
+    .h-tag{
+      display:inline-flex;align-items:center;gap:10px;
+      font-size:11px;letter-spacing:4px;text-transform:uppercase;
+      color:var(--gold);margin-bottom:28px;
+    }
+    .h-tag::before{content:'';width:28px;height:1px;background:var(--gold)}
+    h1{
+      font-family:var(--fs);font-size:clamp(56px,8vw,100px);
+      font-weight:400;line-height:.98;letter-spacing:-1px;margin-bottom:10px;
+    }
+    h1 em{font-style:italic;color:var(--gold)}
+    .h-tagline{
+      font-family:var(--fs);font-style:italic;
+      font-size:clamp(20px,2.5vw,30px);color:var(--mu);margin-bottom:32px;
+    }
+    .h-p{font-size:16px;color:var(--mu);line-height:1.85;max-width:440px;margin-bottom:48px}
+    .btns{display:flex;gap:14px;flex-wrap:wrap}
+    .bg{
+      display:inline-flex;align-items:center;gap:12px;
+      padding:15px 38px;background:var(--gold);color:#000;
+      font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+      border-radius:2px;transition:all .3s;
+    }
+    .bg:hover{background:var(--gll);transform:translateY(-3px);box-shadow:0 14px 40px rgba(201,168,76,.3)}
+    .bo{
+      display:inline-flex;align-items:center;gap:12px;
+      padding:14px 28px;border:1px solid rgba(201,168,76,.35);
+      color:var(--wh);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+      border-radius:2px;transition:all .3s;
+    }
+    .bo:hover{border-color:var(--gold);color:var(--gold)}
+    /* Scroll indicator */
+    .h-sc{
+      position:absolute;bottom:40px;left:6%;margin-left:max(48px,4%);
+      display:flex;align-items:center;gap:12px;
+      font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mu);
+    }
+    .h-scl{width:40px;height:1px;background:linear-gradient(to right,var(--gold),transparent)}
+
+    /* ── ORNAMENT BAR ── */
+    .obar{
+      text-align:center;padding:20px 0;
+      border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);
+      color:var(--gold);font-size:18px;letter-spacing:16px;opacity:.45;
+      background:var(--bg3);
+    }
+
+    /* ── SECTION COMMONS ── */
+    .s-eye{text-align:center;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+    .s-h{font-family:var(--fs);text-align:center;font-size:clamp(32px,4vw,54px);font-weight:400;margin-bottom:14px}
+    .s-h em{font-style:italic;color:var(--gll)}
+    .s-sub{text-align:center;color:var(--mu);font-size:15px;margin-bottom:60px}
+
+    /* ── SERVIZI ── */
+    #servizi{padding:110px 6%}
+    .sv-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      gap:1px;background:var(--bdr);
+      border:1px solid var(--bdr);max-width:1000px;margin:0 auto;
+    }
+    .sv{
+      background:var(--bg2);padding:40px 32px;
+      transition:background .3s;position:relative;overflow:hidden;
+    }
+    .sv::after{
+      content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      transform:scaleX(0);transition:transform .4s;
+    }
+    .sv:hover{background:var(--bg3)}
+    .sv:hover::after{transform:scaleX(1)}
+    .sv-ic{font-size:30px;margin-bottom:20px}
+    .sv-n{font-family:var(--fs);font-size:22px;color:var(--gll);margin-bottom:10px}
+    .sv-d{font-size:14px;color:var(--mu);line-height:1.75;margin-bottom:18px}
+    .sv-p{font-family:var(--fs);font-size:20px;color:var(--gold)}
+
+    /* ── GALLERIA ── */
+    #galleria{padding:90px 6%;background:var(--bg3)}
+    .gl-grid{
+      display:grid;
+      grid-template-columns:1.6fr 1fr 1fr;
+      grid-template-rows:220px 220px;
+      gap:8px;max-width:1000px;margin:0 auto;
+    }
+    .gi{border-radius:3px;overflow:hidden;position:relative}
+    .gi:first-child{grid-row:1/3}
+    .gi-bg{width:100%;height:100%;transition:transform .6s}
+    .gi:hover .gi-bg{transform:scale(1.06)}
+    .gi-l{
+      position:absolute;bottom:0;left:0;right:0;
+      background:linear-gradient(to top,rgba(14,10,13,.85),transparent);
+      padding:20px 16px 14px;
+      font-family:var(--fs);font-size:16px;font-style:italic;
+      color:var(--gll);letter-spacing:.5px;
+    }
+
+    /* ── PREZZI ── */
+    #prezzi{padding:110px 6%}
+    .pz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto}
+    .pz{
+      background:var(--bg2);border:1px solid var(--bdr);border-radius:4px;
+      padding:36px 28px;text-align:center;
+      transition:transform .3s,border-color .3s,box-shadow .3s;
+    }
+    .pz:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.35);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+    .pz-n{font-family:var(--fs);font-size:22px;margin-bottom:8px;color:var(--gll)}
+    .pz-p{font-family:var(--fs);font-size:48px;font-weight:600;color:var(--gold);line-height:1}
+    .pz-from{font-size:13px;color:var(--mu);margin-bottom:20px}
+    .pz-div{height:1px;background:var(--bdr);margin:16px 0}
+    .pz-list{list-style:none;text-align:left}
+    .pz-list li{font-size:14px;color:var(--mu);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+    .pz-list li:last-child{border:none}
+    .pz-list li::before{content:'◇ ';color:var(--gold);font-size:10px}
+
+    /* ── MAPPA ── */
+    #mappa{padding:90px 6%;background:var(--bg3)}
+    .mp-in{max-width:940px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:center}
+    .mp-info h3{font-family:var(--fs);font-size:40px;font-weight:400;margin-bottom:28px}
+    .mp-info h3 em{font-style:italic;color:var(--gll)}
+    .inf{display:flex;gap:14px;margin-bottom:22px;align-items:flex-start}
+    .inf-ic{color:var(--gold);font-size:18px;min-width:24px;margin-top:2px}
+    .inf-t{font-size:15px;color:var(--mu);line-height:1.6}
+    .inf-t strong{color:var(--wh);display:block;font-size:13px;letter-spacing:.5px;margin-bottom:2px}
+    .mp-frame{
+      height:340px;border-radius:4px;overflow:hidden;
+      border:1px solid var(--bdr);background:var(--bg2);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .mp-ph{text-align:center;color:var(--mu)}
+    .mp-ph p{font-size:13px;margin-top:6px}
+
+    /* ── CTA ── */
+    #cta{
+      padding:110px 6%;text-align:center;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 50%,rgba(201,168,76,.06) 0%,transparent 70%),
+        var(--bg3);
+    }
+    #cta h2{font-family:var(--fs);font-size:clamp(34px,5vw,60px);font-weight:400;margin-bottom:16px}
+    #cta h2 em{font-style:italic;color:var(--gold)}
+    #cta p{color:var(--mu);font-size:16px;max-width:460px;margin:0 auto 44px;line-height:1.8}
+
+    /* ── FOOTER ── */
+    footer{
+      padding:28px 6%;border-top:1px solid var(--bdr);
+      display:flex;align-items:center;justify-content:space-between;
+      font-size:13px;color:var(--mu);flex-wrap:wrap;gap:12px;
+    }
+    .back{
+      font-size:11px;letter-spacing:2px;text-transform:uppercase;
+      color:var(--mu);transition:color .25s;
+    }
+    .back:hover{color:var(--gold)}
+
+    /* ── Reveal ── */
+    .rev{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+    .rev.in{opacity:1;transform:translateY(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+    @media(max-width:800px){
+      .sv-grid{grid-template-columns:1fr}
+      .gl-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+      .gi:first-child{grid-row:auto}
+      .pz-grid,.mp-in{grid-template-columns:1fr}
+      .h-vline,.h-ghost{display:none}
+      .h-inner{margin-left:0}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="logo">Salon <em>Élite</em></div>
+    <ul class="nlinks">
+      <li><a href="#servizi">Servizi</a></li>
+      <li><a href="#galleria">Galleria</a></li>
+      <li><a href="#prezzi">Prezzi</a></li>
+      <li><a href="#mappa">Dove siamo</a></li>
+    </ul>
+    <a href="https://wa.me/393000000000" target="_blank" class="nbtn">Prenota</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="h-vline"></div>
+    <div class="h-ghost">SE</div>
+    <div class="h-inner">
+      <div class="h-tag">Parrucchiere · Roma</div>
+      <h1>L'arte di<br>renderti <em>bella</em></h1>
+      <div class="h-tagline">Lievitazione naturale del tuo stile</div>
+      <p class="h-p">Taglio, colore e trattamenti di alta qualità in un'atmosfera elegante e rilassante. Perché ogni dettaglio conta, e tu meriti il meglio.</p>
+      <div class="btns">
+        <a href="https://wa.me/393000000000" target="_blank" class="bg">📲 Prenota ora</a>
+        <a href="#servizi" class="bo">Scopri i servizi</a>
+      </div>
+    </div>
+    <div class="h-sc"><div class="h-scl"></div>Scorri</div>
+  </section>
+
+  <div class="obar">— ✦ ✦ ✦ —</div>
+
+  <!-- SERVIZI -->
+  <section id="servizi">
+    <div class="s-eye rev">I nostri servizi</div>
+    <h2 class="s-h rev d1">Tutto quello che <em>desideri</em></h2>
+    <p class="s-sub rev d2">Ogni trattamento è pensato per valorizzare la tua bellezza naturale</p>
+    <div class="sv-grid">
+      <div class="sv"><div class="sv-ic">✂️</div><div class="sv-n">Taglio &amp; Styling</div><div class="sv-d">Taglio personalizzato in base alla forma del viso e al tuo stile. Con lavaggio e asciugatura professionale.</div><div class="sv-p">da 35€</div></div>
+      <div class="sv"><div class="sv-ic">🎨</div><div class="sv-n">Colorazione</div><div class="sv-d">Tinta, balayage, meches e shatush con prodotti premium. Copertura perfetta e colori brillanti che durano.</div><div class="sv-p">da 60€</div></div>
+      <div class="sv"><div class="sv-ic">💆</div><div class="sv-n">Trattamenti</div><div class="sv-d">Cheratina, ristrutturanti, nutrienti e anti-crespo. Capelli sani, lucidi e morbidi come seta.</div><div class="sv-p">da 50€</div></div>
+      <div class="sv"><div class="sv-ic">💍</div><div class="sv-n">Spose &amp; Cerimonie</div><div class="sv-d">Acconciature per il giorno più bello. Prova inclusa, consulenza personalizzata e servizio puntuale.</div><div class="sv-p">da 120€</div></div>
+      <div class="sv"><div class="sv-ic">🌿</div><div class="sv-n">Linea Bio</div><div class="sv-d">Prodotti biologici certificati, rispettosi di capelli e cute. Per chi ama la natura senza rinunciare al risultato.</div><div class="sv-p">da 45€</div></div>
+      <div class="sv"><div class="sv-ic">🔆</div><div class="sv-n">Piega &amp; Messa in Piega</div><div class="sv-d">Ricci, liscio, volume o naturale. Finisci la giornata con uno stile impeccabile che dura.</div><div class="sv-p">da 25€</div></div>
+    </div>
+  </section>
+
+  <!-- GALLERIA -->
+  <section id="galleria">
+    <div class="s-eye rev">Portfolio</div>
+    <h2 class="s-h rev d1">I nostri <em>lavori</em></h2>
+    <p class="s-sub rev d2" style="margin-bottom:40px">Una selezione dei nostri lavori più recenti</p>
+    <div class="gl-grid">
+      <div class="gi"><div class="gi-bg" style="background:linear-gradient(150deg,#1a0824,#4c1d95,#c084fc);height:100%"></div><div class="gi-l">Balayage Viola</div></div>
+      <div class="gi"><div class="gi-bg" style="background:linear-gradient(135deg,#3d1a1a,#b05c3a,#e8a87c);height:220px"></div><div class="gi-l">Rame Dorato</div></div>
+      <div class="gi"><div class="gi-bg" style="background:linear-gradient(135deg,#1a1a2e,#484878,#b0b0d0);height:220px"></div><div class="gi-l">Grigio Cenere</div></div>
+      <div class="gi"><div class="gi-bg" style="background:linear-gradient(135deg,#2d1a00,#c9a84c,#ffe9a0);height:220px"></div><div class="gi-l">Biondo Dorato</div></div>
+      <div class="gi"><div class="gi-bg" style="background:linear-gradient(135deg,#0d1a10,#1a5c3a,#4caf77);height:220px"></div><div class="gi-l">Fashion Color</div></div>
+    </div>
+  </section>
+
+  <!-- PREZZI -->
+  <section id="prezzi">
+    <div class="s-eye rev">Listino prezzi</div>
+    <h2 class="s-h rev d1">Tariffe <em>trasparenti</em></h2>
+    <p class="s-sub rev d2">Senza sorprese. I prezzi indicati sono orientativi, il preventivo è sempre gratuito.</p>
+    <div class="pz-grid">
+      <div class="pz rev">
+        <div class="pz-n">Taglio &amp; Piega</div>
+        <div class="pz-p">35€</div><div class="pz-from">e oltre</div>
+        <div class="pz-div"></div>
+        <ul class="pz-list">
+          <li>Lavaggio incluso</li><li>Asciugatura e styling</li><li>Consulenza inclusa</li>
+        </ul>
+      </div>
+      <div class="pz rev d1">
+        <div class="pz-n">Colore Completo</div>
+        <div class="pz-p">70€</div><div class="pz-from">e oltre</div>
+        <div class="pz-div"></div>
+        <ul class="pz-list">
+          <li>Tinta radici o full color</li><li>Prodotti premium</li><li>Trattamento post-colore</li>
+        </ul>
+      </div>
+      <div class="pz rev d2">
+        <div class="pz-n">Balayage &amp; Meches</div>
+        <div class="pz-p">90€</div><div class="pz-from">e oltre</div>
+        <div class="pz-div"></div>
+        <ul class="pz-list">
+          <li>Schiariture personalizzate</li><li>Effetto naturale</li><li>Piega inclusa</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPPA -->
+  <section id="mappa">
+    <div class="mp-in">
+      <div class="mp-info rev">
+        <h3>Dove <em>trovarci</em></h3>
+        <div class="inf"><div class="inf-ic">📍</div><div class="inf-t"><strong>Indirizzo</strong>Via dei Fiori 42, Roma (RM)</div></div>
+        <div class="inf"><div class="inf-ic">🕐</div><div class="inf-t"><strong>Orari</strong>Lun–Ven: 9:00–19:30<br>Sabato: 9:00–17:00<br>Domenica: Chiuso</div></div>
+        <div class="inf"><div class="inf-ic">📞</div><div class="inf-t"><strong>Telefono</strong>+39 06 123 4567</div></div>
+        <div class="inf"><div class="inf-ic">📱</div><div class="inf-t"><strong>WhatsApp</strong>+39 300 000 0000</div></div>
+        <div style="margin-top:28px">
+          <a href="https://wa.me/393000000000" target="_blank" class="bg" style="font-size:12px;padding:12px 28px">📲 Prenota ora</a>
+        </div>
+      </div>
+      <div class="mp-frame rev d1">
+        <div class="mp-ph">
+          <div style="font-size:44px">🗺️</div>
+          <p style="color:var(--gll);margin-top:14px;font-family:var(--fs);font-size:20px;font-style:italic">Salon Élite</p>
+          <p style="margin-top:6px">Via dei Fiori 42, Roma</p>
+          <a href="https://maps.google.com" target="_blank" style="display:inline-block;margin-top:18px;color:var(--gold);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid var(--gold);padding-bottom:2px">Apri in Google Maps →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <h2 class="rev">Pronta per un nuovo <em>look?</em></h2>
+    <p class="rev d1">Prenota il tuo appuntamento direttamente su WhatsApp. Rispondiamo entro pochi minuti.</p>
+    <a href="https://wa.me/393000000000" target="_blank" class="bg rev d2" style="font-size:13px;padding:17px 48px">
+      📲 Prenota su WhatsApp
+    </a>
+  </section>
+
+  <footer>
+    <div>© Salon Élite · Via dei Fiori 42, Roma</div>
+    <a href="index.html" class="back">← Sito realizzato da Pixelostia</a>
+  </footer>
+
+  <script>
+    /* ── Navbar ── */
+    const nav=document.getElementById('nav');
+    window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>50),{passive:true});
+
+    /* ── Reveal ── */
+    const obs=new IntersectionObserver(e=>{
+      e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}});
+    },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+
+    /* ── Smooth scroll ── */
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const t=document.querySelector(a.getAttribute('href'));
+        if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+      });
+    });
+  </script>
+</body>
+</html>
